@@ -185,19 +185,26 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #780c0e; /* The deep red background */
   color: #F5F5DC; /* Default global text to Beige for visibility */
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1 {
   font-family: 'Bruno Ace SC', sans-serif;
   color: #F5F5DC; /* Beige */
   text-align: center;
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 /* 2. The Group Headings (Group A, Group B, etc.) */
@@ -205,28 +212,42 @@ h2 {
   font-family: 'Michroma', sans-serif;
   color: #F5F5DC; /* Beige */
   text-align: center;
-  font-size: 1.8rem;
+  font-size: clamp(1.1rem, 2.6vw, 1.8rem);
   letter-spacing: 2px;
   margin-top: 2rem;
+  line-height: 1.3;
 }
 
 .app-wrapper {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%;
+}
+
+.header-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-layout {
+  width: 100%;
 }
 
 button {
   font-family: 'Elms Sans', sans-serif;
-  font-size: 1.3rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.3rem);
   background-color: #F5F5DC; /* Beige button */
   color: #780c0e; /* Red text */
   border: 2px solid #4a0708; /* Darker red border for depth */
   border-radius: 4px;
-  padding: 6px 18px;
+  padding: 0.6rem 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  display: block;
+  display: inline-block;
   margin: 0 auto;
 }
 
@@ -237,8 +258,8 @@ button:hover {
 
 .bracket-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
 }
 
 /* This is the core change: swapping black with the new Green */
@@ -250,6 +271,7 @@ button:hover {
   text-align: center;
   transition: all 0.2s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Floating effect for cards */
+  min-width: 0;
 }
 
 /* Slight lift and glow on hover to make it feel premium and interactive */
@@ -293,6 +315,23 @@ button:hover {
   color: #ffffff; /* Bright white for primary information */
   font-weight: 600;
   font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.team-name-with-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.country-flag {
+  width: 22px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 /* Update the small 'vs' divider color for readability on green */
@@ -300,6 +339,124 @@ button:hover {
   margin: 0.5rem 0;
   font-size: 0.8rem;
   color: #f5f5dc; /* Clear beige */
+}
+
+.fixtures-container {
+  width: 100%;
+}
+
+.fixtures-group-block {
+  margin-bottom: 2rem;
+}
+
+.fixtures-group-block h3 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.fixtures-matchdays {
+  display: grid;
+  gap: 1rem;
+}
+
+.fixtures-matchday-card {
+  background: #f5f5dc;
+  color: #1f1f1f;
+  border-radius: 10px;
+  padding: 0.9rem;
+}
+
+.fixtures-matchday-card h4 {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  color: #780c0e;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.fixtures-day-grid {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.fixtures-card {
+  background: #fffaf0;
+  border: 1px solid #d9d3b5;
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.fixtures-team-row {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.fixtures-team-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.fixtures-team-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.fixtures-team-right .fixtures-team-content {
+  margin-left: auto;
+}
+
+.fixtures-team-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+}
+
+.fixtures-team-content span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fixtures-vs {
+  justify-self: center;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #780c0e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding: 0 0.15rem;
+}
+
+.fixtures-status {
+  justify-self: center;
+  text-align: center;
+  font-size: 0.76rem;
+  color: #4a4a4a;
+  white-space: nowrap;
+  min-width: 2.8rem;
+}
+
+.fixtures-score-pill {
+  background: #f5f5dc;
+  color: #780c0e;
+  padding: 0.18rem 0.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.fixtures-status-placeholder {
+  display: inline-block;
+  width: 2.8rem;
 }
 
 /* --- TABLE AESTHETICS (The Inversion) --- */
@@ -311,9 +468,29 @@ table {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Heavy shadow to pop off the red */
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   color: #000000; /* Black text for content readability */
   font-family: 'Quantico', sans-serif; /* Quantico for all table content */
+}
+
+.standings-container {
+  width: 100%;
+}
+
+.group-table-wrap {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.group-standings-table {
+  table-layout: auto;
+  min-width: 100%;
 }
 
 /* Header Row Styling */
@@ -394,7 +571,7 @@ td:last-child strong {
 /* The outer container - adding some spacing and a border for visual separation */
 .knockout-container {
   margin-top: 3rem;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #f5f5dc; /* Beige container background for clear contrast against the main body red */
   border-radius: 12px;
   border: 4px solid #d4d4b2; /* Subtle beige border for depth */
@@ -406,4 +583,153 @@ td:last-child strong {
   color: #780c0e; /* Use the main tournament Red for the heading to tie it into the overall theme */
   margin-top: 0;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .app-wrapper {
+    padding: 1rem;
+  }
+
+  .knockout-container {
+    padding: 1rem;
+  }
+
+  table {
+    min-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 10px 8px;
+    font-size: 0.78rem;
+  }
+
+  .team-name-cell strong {
+    font-size: 0.88rem;
+  }
+
+  .fixtures-team-row {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .header-controls {
+    flex-direction: column;
+  }
+
+  .table-scroll-wrapper {
+    margin: 0;
+  }
+
+  table {
+    min-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 8px 6px;
+    font-size: 0.72rem;
+  }
+
+  .team-name-cell strong {
+    font-size: 0.82rem;
+  }
+
+  .team-player {
+    font-size: 0.68rem;
+  }
+
+  .fixtures-matchday-card {
+    padding: 0.7rem;
+  }
+
+  .fixtures-card {
+    padding: 0.55rem;
+  }
+
+  .fixtures-team-row,
+  .fixtures-status {
+    font-size: 0.78rem;
+  }
+
+  .country-flag {
+    width: 18px;
+    height: 12px;
+  }
+
+  .bracket-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .app-wrapper {
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .table-scroll-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 520px;
+  }
+
+  th,
+  td {
+    padding: 6px 4px;
+    font-size: 0.66rem;
+  }
+
+  .team-name-cell {
+    padding-left: 8px;
+  }
+
+  .team-name-cell strong {
+    font-size: 0.76rem;
+  }
+
+  .team-player {
+    font-size: 0.62rem;
+  }
+
+  .fixtures-matchday-card h4 {
+    font-size: 0.82rem;
+  }
+
+  .fixtures-card {
+    gap: 0.25rem;
+  }
+
+  .fixtures-vs {
+    font-size: 0.72rem;
+  }
+
+  .fixtures-status {
+    font-size: 0.7rem;
+  }
 }

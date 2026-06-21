@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from './lib/supabase'; // Adjust path if needed
+import { supabase } from './lib/supabase';
 import GroupStandings from './components/GroupStandings';
-import WildcardStandings from './components/WildcardStandings';
 import AdminPanel from './components/AdminPanel';
 import Login from './components/Login';
 import './App.css';
 import KnockoutBracket from './components/KnockoutBracket';
+import Fixtures from './components/Fixtures';
 
 function App() {
   const [isAdminView, setIsAdminView] = useState(false);
   const [session, setSession] = useState(null);
+  const [activePublicTab, setActivePublicTab] = useState('standings');
 
   // Listen for login/logout events
   useEffect(() => {
@@ -33,7 +34,7 @@ function App() {
   return (
     <div className="app-wrapper">
     <header>
-    <h1>BFK World Cup 2026</h1>
+    <h1>Nila FC eFootball World Cup</h1>
     <div className="header-controls">
     <button
     className="view-toggle-btn"
@@ -54,20 +55,51 @@ function App() {
     <main className="dashboard-layout">
     {isAdminView ? (
       <section className="full-width-panel">
-      {/* The Protection Logic: If no session, show Login. If session, show AdminPanel. */}
       {!session ? <Login /> : <AdminPanel />}
       </section>
     ) : (
       <>
-      <section className="left-panel">
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+      <button
+      className="view-toggle-btn"
+      onClick={() => setActivePublicTab('standings')}
+      style={{ opacity: activePublicTab === 'standings' ? 1 : 0.7 }}
+      >
+      Group Table
+      </button>
+      <button
+      className="view-toggle-btn"
+      onClick={() => setActivePublicTab('fixtures')}
+      style={{ opacity: activePublicTab === 'fixtures' ? 1 : 0.7 }}
+      >
+      Group Fixtures
+      </button>
+      <button
+      className="view-toggle-btn"
+      onClick={() => setActivePublicTab('knockout')}
+      style={{ opacity: activePublicTab === 'knockout' ? 1 : 0.7 }}
+      >
+      Knockout Fixtures
+      </button>
+      </div>
+
+      {activePublicTab === 'standings' && (
+      <section className="full-width-panel">
       <GroupStandings />
       </section>
-      <section className="right-panel">
-      <WildcardStandings />
+      )}
+
+      {activePublicTab === 'fixtures' && (
+      <section className="full-width-panel">
+      <Fixtures />
       </section>
-      <section className="full-width-panel" style={{ marginTop: '2rem' }}>
+      )}
+
+      {activePublicTab === 'knockout' && (
+      <section className="full-width-panel">
       <KnockoutBracket />
       </section>
+      )}
       </>
     )}
     </main>
