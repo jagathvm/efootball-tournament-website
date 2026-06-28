@@ -50,6 +50,8 @@
     flex-direction: column;
     justify-content: center;
     line-height: 1.2;
+    flex: 1;
+    min-width: 0;
 }
 
 .player-name {
@@ -62,6 +64,9 @@
     font-size: 1.1rem;
     font-weight: 700;
     color: white;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
 .counter {
@@ -313,6 +318,7 @@ button {
     transition: all 0.2s ease;
     display: inline-block;
     margin: 0 auto;
+    width: auto;
 }
 
 button:hover {
@@ -359,7 +365,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 12px;
     padding: 0.5rem;
     background: #013a0e; /* Darker green, not grey, to create internal logic with the card */
     border-radius: 4px;
@@ -398,8 +404,10 @@ button:hover {
 
 .team-name-with-flag {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
+    flex: 1;
+    min-width: 0;
 }
 
 .country-flag {
@@ -482,9 +490,9 @@ button:hover {
     border-radius: 8px;
     padding: 0.45rem 0.6rem;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+    grid-template-columns: 1fr 60px 1fr 70px;
     align-items: center;
-    gap: 0.35rem;
+    gap: 12px;
     width: 100%;
 }
 
@@ -505,13 +513,15 @@ button:hover {
 }
 
 .fixtures-team-right .fixtures-team-content {
-    margin-left: auto;
+    justify-content: flex-end;
+    width: 100%;
+    flex-direction: row;
 }
 
 .fixtures-team-content {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 8px;
     max-width: 100%;
 }
 
@@ -534,7 +544,7 @@ button:hover {
 }
 
 .fixtures-status {
-    justify-self: center;
+    justify-self: end;
     text-align: center;
     font-size: 0.76rem;
     color: #4a4a4a;
@@ -548,6 +558,7 @@ button:hover {
     padding: 0.18rem 0.4rem;
     border-radius: 999px;
     font-weight: 700;
+    margin-left: auto;
 }
 
 .fixtures-status-placeholder {
@@ -683,15 +694,26 @@ td:last-child strong {
 
 .quarterfinal-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
     gap: 2rem;
     margin-top: 1rem;
-    align-items: start;
+}
+
+.final-stage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
     .app-wrapper {
         padding: 1rem;
+    }
+
+    button {
+        width: 100%;
+        max-width: 320px;
     }
 
     .knockout-container {
@@ -714,6 +736,56 @@ td:last-child strong {
 
     .fixtures-team-row {
         justify-content: flex-start;
+    }
+
+    .quarterfinal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-row {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .match-card {
+        padding: 16px;
+    }
+
+    .match-header {
+        font-size: 1rem;
+    }
+
+    .team-name {
+        font-size: 1.1rem;
+    }
+
+    .player-name {
+        font-size: 0.95rem;
+    }
+
+    .country-flag {
+        width: 28px;
+        height: 20px;
+    }
+
+    .score-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .podium-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .podium-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .final-stage-grid {
+        grid-template-columns: 1fr;
     }
 }
 

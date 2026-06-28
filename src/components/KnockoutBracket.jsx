@@ -143,25 +143,21 @@ export default function KnockoutBracket() {
         </div>
       )}
 
-      {/* Third Place */}
-      {tournament.thirdPlace && (
-        <div style={{ marginTop: "1rem" }}>
-          <h3>Third Place</h3>
-          <div className="bracket-grid">
+      <div className="final-stage-grid">
+        {tournament.thirdPlace && (
+          <div>
+            <h3>Third Place</h3>
             {renderMatchCard(tournament.thirdPlace, 0)}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Final */}
-      {tournament.final && (
-        <div style={{ marginTop: "1rem" }}>
-          <h3>Final</h3>
-          <div className="bracket-grid">
+        {tournament.final && (
+          <div>
+            <h3>Final</h3>
             {renderMatchCard(tournament.final, 0)}
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {tournament.champion && (
         <div className="podium-container">
